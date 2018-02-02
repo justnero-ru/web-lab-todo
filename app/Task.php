@@ -24,17 +24,17 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \App\Task|null $parent
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Task done()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Task notDone()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Task whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Task whereDepth($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Task whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Task whereDone($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Task whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Task whereLft($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Task whereParentId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Task whereRgt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Task whereTaskGroupId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Task whereTitle($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Task whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Task whereCreatedAt( $value )
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Task whereDepth( $value )
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Task whereDescription( $value )
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Task whereDone( $value )
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Task whereId( $value )
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Task whereLft( $value )
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Task whereParentId( $value )
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Task whereRgt( $value )
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Task whereTaskGroupId( $value )
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Task whereTitle( $value )
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Task whereUpdatedAt( $value )
  * @mixin \Eloquent
  */
 class Task extends Model {
@@ -85,6 +85,11 @@ class Task extends Model {
 	 */
 	public function scopeNotDone( $query ) {
 		return $query->where( 'done', false );
+	}
+
+	public function duplicateFor( TaskGroup $group ) {
+		$task = $this->replicate();
+		$group->tasks()->save( $task );
 	}
 
 }

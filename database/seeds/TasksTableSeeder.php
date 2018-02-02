@@ -31,7 +31,7 @@ class TasksTableSeeder extends Seeder {
 				[
 					'id'            => 2,
 					'title'         => 'Установите Composer',
-					'description'   => '<p><br><a href="https://getcomposer.org" target="_blank">https://getcomposer.org</a></p>',
+					'description'   => '<p><a href="https://getcomposer.org" target="_blank">https://getcomposer.org</a></p>',
 					'done'          => 0,
 					'task_group_id' => 1,
 					'parent_id'     => null,

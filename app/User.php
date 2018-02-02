@@ -74,4 +74,8 @@ class User extends Authenticatable {
 	public function taskGroups() {
 		return $this->hasMany( 'App\TaskGroup' );
 	}
+
+	public function taskGroupsWithTasks() {
+		return $this->taskGroups()->with('tasks')->get();
+	}
 }
